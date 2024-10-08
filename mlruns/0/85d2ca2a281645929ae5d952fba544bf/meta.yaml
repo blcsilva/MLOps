@@ -1,0 +1,15 @@
+artifact_uri: file:///C:/Users/Pichau/Documents/MLOps/mlruns/0/85d2ca2a281645929ae5d952fba544bf/artifacts
+end_time: 1728402347177
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: 85d2ca2a281645929ae5d952fba544bf
+run_name: persistent-wren-840
+run_uuid: 85d2ca2a281645929ae5d952fba544bf
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1728402333966
+status: 3
+tags: []
+user_id: Pichau

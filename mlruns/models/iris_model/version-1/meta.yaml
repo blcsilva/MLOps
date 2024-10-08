@@ -1,0 +1,14 @@
+aliases: []
+creation_timestamp: 1728403189622
+current_stage: None
+description: null
+last_updated_timestamp: 1728403189622
+name: iris_model
+run_id: 872acc95680c4a7599c2ee41333b9391
+run_link: null
+source: file:///C:/Users/Pichau/Documents/MLOps/mlruns/0/872acc95680c4a7599c2ee41333b9391/artifacts/iris_model
+status: READY
+status_message: null
+storage_location: file:///C:/Users/Pichau/Documents/MLOps/mlruns/0/872acc95680c4a7599c2ee41333b9391/artifacts/iris_model
+user_id: null
+version: 1

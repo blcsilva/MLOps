@@ -1,0 +1,32 @@
+version: '3.8'
+
+services:
+  mlflow:
+    build: .
+    ports:
+      - "5000:5000"
+    volumes:
+      - ./artifacts:/artifacts
+    environment:
+      - MLFLOW_TRACKING_URI=http://localhost:5000
+    command: mlflow server --backend-store-uri sqlite:///mlflow.db --default-artifact-root /artifacts
+    depends_on:
+      - sqlite
+
+  sqlite:
+    image: nouchka/sqlite3:latest
+    volumes:
+      - ./data:/data
+    command: sqlite3 /data/mlflow.db
+
+  train:
+    build: .
+    command: python train.py
+    depends_on:
+      - mlflow
+
+  load:
+    build: .
+    command: python load_model.py
+    depends_on:
+      - mlflow
