@@ -30,6 +30,7 @@ docker-compose.override.yml
 # MLflow artifacts
 artifacts/
 mlflow.db
+mlops-env/
 
 # System files
 .DS_Store
