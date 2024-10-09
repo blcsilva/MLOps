@@ -26,8 +26,8 @@ Para executar a aplicação, você precisa ter o Docker e o Docker Compose insta
 
 1. Clone este repositório:
    ```bash
-   git clone https://github.com/seuusuario/seurepositorio.git
-   cd seurepositorio
+   git clone https://github.com/blcsilva/MLOps.git
+   cd MLOps
    ```
 
 2. Inicie os contêineres com o Docker Compose:
@@ -49,10 +49,10 @@ Para executar a aplicação, você precisa ter o Docker e o Docker Compose insta
 .
 ├── docker-compose.yml
 ├── Dockerfile
-├── scripts
-│   ├── train.py
-│   └── load_model.py
+├── train.py
+└── load_model.py
 ├── requirements.txt
+├── start_web.sh
 └── .gitignore
 ```
 
