@@ -13,7 +13,7 @@ services:
     command: ["./start_web.sh"]
 
   mlflow:
-    image: ghcr.io/mlflow/mlflow:v2.0.1
+    image: ghcr.io/mlflow/mlflow:latest
     ports:
       - "5000:5000"
     environment:
