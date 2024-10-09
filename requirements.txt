@@ -3,9 +3,9 @@ scikit-learn
 pandas
 Flask
 gunicorn
-libpq-dev
-psycopg2
-psycopg2-binary
+
+
+
 
 
 

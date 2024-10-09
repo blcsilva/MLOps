@@ -2,52 +2,45 @@ services:
   web:
     build: .
     ports:
-      - "5000:5000"
+      - "5002:5002"
     environment:
       - FLASK_ENV=development
       - DATABASE_URL=sqlite:///mydatabase.db
       - MLFLOW_TRACKING_URI=http://mlflow:5000
     depends_on:
       - mlflow
-    command: flask run --host=0.0.0.0
+      - load_model
+    command: ["./start_web.sh"]
 
   mlflow:
-    image: mlflow/mlflow:1.30.0
+    image: ghcr.io/mlflow/mlflow:v2.0.1
     ports:
-      - "5001:5000"
+      - "5000:5000"
     environment:
-      MLFLOW_TRACKING_URI: http://mlflow:5000
-    command: mlflow server --host 0.0.0.0 --backend-store-uri sqlite:///mlflow.db --default-artifact-root /mlflow/artifacts
+      - MLFLOW_TRACKING_URI=http://mlflow:5000
+    command: ["mlflow", "ui", "--host", "0.0.0.0", "--backend-store-uri", "sqlite:///mlflow.db", "--default-artifact-root", "/mlflow/artifacts"]
     volumes:
       - mlflow_artifacts:/mlflow/artifacts
 
-  train:
-    build: .
-    command: python train.py
-    depends_on:
-      - mlflow
+  db:
+    image: postgres:13
     environment:
-      - DATABASE_URL=sqlite:///mydatabase.db
-      - MLFLOW_TRACKING_URI=http://mlflow:5000
-
+      - POSTGRES_USER=admin
+      - POSTGRES_PASSWORD=1q2w3e4r
+      - POSTGRES_DB=mydatabase
+    volumes:
+      - db_data:/var/lib/postgresql/data
+    
   load_model:
     build: .
     command: python load_model.py
     depends_on:
+      - db
       - mlflow
     environment:
-      - DATABASE_URL=sqlite:///mydatabase.db
+      - DATABASE_URL=postgresql://admin:1q2w3e4r@db:5432/mydatabase
       - MLFLOW_TRACKING_URI=http://mlflow:5000
 
-  mlflow_ui:
-    image: mlflow/mlflow:1.30.0
-    ports:
-      - "5002:5000"
-    command: mlflow ui --host 0.0.0.0 --port 5000 --backend-store-uri sqlite:///mlflow.db
-    depends_on:
-      - mlflow
-    environment:
-      MLFLOW_TRACKING_URI: http://mlflow:5000
-
 volumes:
+  db_data:
   mlflow_artifacts:
